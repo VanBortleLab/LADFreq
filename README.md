@@ -29,4 +29,15 @@ Therefore for each experiment, we selected the coordinates that have an overlap 
 The distribution of LADs in the whole genome would look something like this. The maximum number of overlaps is 110 (Total # of experiments)
 ![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/677ab9fc-6f8d-430e-bf1c-ed00b68f2bf9)
 
-  
+# Overlap of Genes of Interest in LAD domains
+
+Something that is possible to do, with the information gathered previously is to explore how likely a group of genes locate in LADs.
+
+We obtained a set of ncRNA coordinates extracted from the annotations present in RNA Central. Then we looked for the intersect between these annotations with the LADs. The following command helps to retrieve information about this overlap
+
+ https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html
+ 
+```
+# Names for illustration purposes
+bedtools intersect -a gene_coordinates_of_interest.bed -b LAD_Overlap_Consensus.bed -wao > overlap_by_genes.bed 
+``` 
