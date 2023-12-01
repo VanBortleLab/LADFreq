@@ -26,5 +26,7 @@ Therefore for each experiment, we selected the coordinates that have an overlap 
 
 **Note: If you are going to use any of these codes make sure to adjust your directories and so on**
 
+The distribution of LADs in the whole genome would look something like this. The maximum number of overlaps is 110 (Total # of experiments)
+![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/677ab9fc-6f8d-430e-bf1c-ed00b68f2bf9)
 
   
