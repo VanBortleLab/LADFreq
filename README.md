@@ -45,6 +45,15 @@ bedtools intersect -a gene_coordinates_of_interest.bed -b LAD_Overlap_Consensus.
 
 Once obtained the overlap data frame, we can perform some data exploration. If we have different groups for the genes evaluated we can see a descriptive analysis of the overall localization of these groups in  the defined LAD domains accounting. For example, figure below, shows the localization of all the genes, grouped in different categories, across the LAD domains accounting for the frequency mentioned above
 
-![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/203a3dcb-12ec-415c-886b-d63a65b1b715)
+![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/50096e44-ac4e-4d8d-8685-c8796590e045)
+
+
+Furthermore we can perform a permutation test to determine how significant a group is located in high frequency or low frequency lads. The R script `lamin_domains_groups_overlap.R` has the code for this purpose. In the figure below we can observe the distribution of the permutation test, the dashed lines represent the median frequency for the evaluated group.
+
+![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/b5473a81-7ef5-4c73-a6ae-d75e85acb25c)
+
+
+
+
 
 
