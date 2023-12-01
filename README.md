@@ -41,4 +41,10 @@ We obtained a set of ncRNA coordinates extracted from the annotations present in
 ```
 # Names for illustration purposes
 bedtools intersect -a gene_coordinates_of_interest.bed -b LAD_Overlap_Consensus.bed -wao > overlap_by_genes.bed 
-``` 
+```
+
+Once obtained the overlap data frame, we can perform some data exploration. If we have different groups for the genes evaluated we can see a descriptive analysis of the overall localization of these groups in  the defined LAD domains accounting. For example, figure below, shows the localization of all the genes, grouped in different categories, across the LAD domains accounting for the frequency mentioned above
+
+![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/203a3dcb-12ec-415c-886b-d63a65b1b715)
+
+
