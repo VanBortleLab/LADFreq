@@ -21,4 +21,8 @@ https://bedtools.readthedocs.io/en/latest/content/tools/multiinter.html
 ```
 bedtools multiinter -i *.bed  > combined_LAD_4DNES19V4V3C_.bed
 ```
+
+For each experiment, we selected the coordinates that have an overlap equal to the total number of files associated to it. The shell script `LAD_Experiment.sh` has a code containing a loop for performing this on each experiment file. The output of this shell script is a data frame that contains the LAD frequencies for each coordinate. Therefore high frequency coordinates are very likely to be LADs. This summary file is also present in this repository - Look for `LAD_Overlap_Consensus.bed`
+
+
   
