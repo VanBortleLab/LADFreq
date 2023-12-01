@@ -36,3 +36,5 @@ done
  bedtools multiinter -i $out_dir/*_filtered.bed > "$out_dir/LAD_Overlap_Consensus.bed"
 
  rm $out_dir/*_filtered.bed
+
+awk -v OFS='\t' '{print $1, $2, $3, $4}' "$out_dir/LAD_Overlap_Consensus.bed" > "$out_dir/LAD_Overlap_Consensus1.bed"
