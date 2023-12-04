@@ -3,52 +3,46 @@
 Lamin Associated Domains Frequency.
 
 Data source: https://data.4dnucleome.org/
-
-1. Look for DamID-Seq and pA-DamID
-2. Download only bed files. These bed files have the coordinates for the LAD domains.
-3. Metadata is available in this code - Look for `original_metadata.tsv`
+Metadata `original_metadata.tsv` used for LAD calls were retrieved with the following steps:
+1. Search for LADs (Files)
+2. Select File Properties: File Type: LADs
+3. Select File Properties: File Format: BED
+4. Select Assay Details: LMNB1 | LMNB2 | Lmnb1 (mouse) | Lamin A/C
 
 # Data Processing
-Before accounting for LAD frequencies, for each unique experiment present in the original metadata we performed some mild processing for defining unique LAD domains for each experiment accounting for different bin sizes. An R code is available for this preprocessing - Look for `metadata_processing.R` and `LAD_Experiment.sh`
+The list of BED files described in `original_metadata.tsv` include multiple entries for the same biological experiment (e.g. BED files defining LADs at varied bin resolutions). 
 
-For example.
-- Experiment ID: 4DNES19V4V3C has two bed files associated with it:
+Experiment ID: 4DNES19V4V3C, for example, has two bed files associated with it:
    - 4DNFIJYW6AJ8
    - 4DNFILJ3UQ5X
 
-We performed the following command on bedTools:
-https://bedtools.readthedocs.io/en/latest/content/tools/multiinter.html
+We consolidate entries by unique experiment ID, taking into account the frequency of LAD calls across bin resolution (see `metadata_processing.R` and `LAD_Experiment.sh`)
 
+Specifically, we annotated the frequency of intra-experimental LAD calls using BEDTools multiintersect: 
 ```
 bedtools multiinter -i *.bed  > combined_LAD_4DNES19V4V3C_.bed
 ```
+For each experiment, we restricted LAD calls to coordinates with the highest LAD frequency (overlap equal to the total number of associated files, see `LAD_Experiment.sh` summary file `LAD_Overlap_Consensus1.bed.gz`
 
-Therefore for each experiment, we selected the coordinates that have an overlap equal to the total number of files associated with it. The shell script `LAD_Experiment.sh` has a code containing a loop for performing this on each experiment file. The output of this shell script is a data frame that contains the LAD frequencies for each coordinate. Therefore high frequency coordinates are very likely to be LADs. This summary file is also present in this repository - Look for `LAD_Overlap_Consensus1.bed.gz`
-
-**Note: If you are going to use any of these codes make sure to adjust your directories and so on**
-
-The distribution of LADs in the whole genome would look something like this. The maximum number of overlaps is 110 (Total # of experiments)
+The global distribution of LADs as a function of inter-experimental LAD frequency (110 unique experiments):
 ![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/677ab9fc-6f8d-430e-bf1c-ed00b68f2bf9)
 
-# Overlap of Genes of Interest in LAD domains
+# Determining Overlap and Enrichment of Specific Genes in Lamin Associated Domains:
 
-Something that is possible to do, with the information gathered previously is to explore how likely a group of genes locate in LADs.
+Our motivation for defining LAD frequencies is to explore the enrichment of specific gene sets (encoding small noncoding RNAs) within these genomic windows.
 
-We obtained a set of ncRNA coordinates extracted from the annotations present in RNA Central. Then we looked for the intersect between these annotations with the LADs. The following command helps to retrieve information about this overlap - Look for `overlap_by_genes.bed.gz`
-
- https://bedtools.readthedocs.io/en/latest/content/tools/intersect.html
- 
+To determine overall LAD frequencies, annotations corresponding to ncRNA genes were obtained from RNAcentral (https://rnacentral.org/). 
+LAD frequencies were subsequently extracted using BEDTools intersect (see `overlap_by_genes.bed.gz`):
 ```
 # Names for illustration purposes
 bedtools intersect -a gene_coordinates_of_interest.bed -b LAD_Overlap_Consensus.bed -wao > overlap_by_genes.bed 
 ```
 
-Once obtained the overlap data frame, we can perform some data exploration. If we have different groups for the genes evaluated we can see a descriptive analysis of the overall localization of these groups in  the defined LAD domains accounting. For example, figure below, shows the localization of all the genes, grouped in different categories, across the LAD domains accounting for the frequency mentioned above
+First, we considered the LAD frequencies for different groups for the genes. In the example below, we compare the LAD frequencies across distinct groups of Pol III-transcribed genes:
 
 ![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/50096e44-ac4e-4d8d-8685-c8796590e045)
 
-
-Furthermore we can perform a permutation test to determine how significant a group is located in high frequency or low frequency lads. The R script `lamin_domains_groups_overlap.R` has the code for this purpose. In the figure below we can observe the distribution of the permutation test, the dashed lines represent the median frequency for the evaluated group.
+Second, we assessed the overall significance of LAD overlap for each subgroup using a permutation test (see `lamin_domains_groups_overlap.R`). In example below, observe significant enrichment of "Tissue-specific" Pol III-transcribed genes in Lamin Associated Domains:
 
 ![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/b5473a81-7ef5-4c73-a6ae-d75e85acb25c)
 
