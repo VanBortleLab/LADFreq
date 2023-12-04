@@ -1,6 +1,6 @@
-# LaminAsociatedDomains
+# LADFreq
 
-Lamin Associated Domains Frequency.
+Defining Lamin Associated Domain Frequency
 
 Data source: https://data.4dnucleome.org/
 Metadata `original_metadata.tsv` used for LAD calls were retrieved with the following steps:
