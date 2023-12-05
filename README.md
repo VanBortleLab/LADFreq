@@ -1,4 +1,4 @@
-# LADFreq
+# <img src="LADFreq.png" width="400px">
 
 Defining Lamin Associated Domain Frequency
 
