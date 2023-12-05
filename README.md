@@ -2,7 +2,7 @@
 
 Defining Lamin Associated Domain Frequency
 
-Data source: https://data.4dnucleome.org/
+Data source: https://data.4dnucleome.org/  
 Metadata `original_metadata.tsv` used for LAD calls were retrieved with the following steps:
 1. Search for LADs (Files)
 2. Select File Properties: File Type: LADs
@@ -24,7 +24,8 @@ bedtools multiinter -i *.bed  > combined_LAD_4DNES19V4V3C_.bed
 ```
 For each experiment, we restricted LAD calls to coordinates with the highest LAD frequency (overlap equal to the total number of associated files, see `LAD_Experiment.sh` summary file `LAD_Overlap_Consensus1.bed.gz`
 
-The global distribution of LADs as a function of inter-experimental LAD frequency (110 unique experiments):
+The global distribution of LADs as a function of inter-experimental LAD frequency (110 unique experiments):  
+  
 ![image](https://github.com/VanBortleLab/LaminAsociatedDomains/assets/124115449/677ab9fc-6f8d-430e-bf1c-ed00b68f2bf9)
 
 # Determining Overlap and Enrichment of Specific Genes in Lamin Associated Domains:
